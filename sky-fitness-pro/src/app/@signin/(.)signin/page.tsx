@@ -83,7 +83,7 @@ export default function SignInPage() {
 
             {errorText &&
               <p className="text-rose-500 text-center mt-1">Логин и пароль не совпадают. 
-               <span className="underline cursor-pointer"
+               <span className="underline cursor-custom"
                   onClick={() => toSendPasswordResetEmail(userData)}
                 > Восстановить пароль?
                 </span>

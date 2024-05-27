@@ -63,7 +63,7 @@ export default function CourseCard({
               e.stopPropagation();
               removeSubscribedCourse(courseId);
             }}
-            className="absolute w-8 h-8 right-[20px] top-[20px] z-10"
+            className="absolute w-8 h-8 right-[20px] top-[20px] z-10 cursor-custom"
           >
             <g>
               <title>Удалить курс</title>
@@ -73,7 +73,7 @@ export default function CourseCard({
         ) : (
           <svg
             onClick={e => handlerAddCourse(e)}
-            className="absolute w-8 h-8 right-[20px] top-[20px] z-10"
+            className="absolute w-8 h-8 right-[20px] top-[20px] z-10 cursor-custom"
           >
             <g>
               <title>Добавить курс</title>

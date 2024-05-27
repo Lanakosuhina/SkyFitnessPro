@@ -42,7 +42,7 @@ export default function DropDown({
           }}
         />
         <button
-          className="rounded-full border border-black w-full h-[52px] px-5 bg-transparent text-lg text-[#000000] hover:bg-[#F7F7F7] active:bg-[#E9ECED]"
+          className="rounded-full border border-black w-full h-[52px] px-5 bg-transparent text-lg text-[#000000] hover:bg-[#F7F7F7] active:bg-[#E9ECED] cursor-custom"
           onClick={() => {
             handleLogout();
             toggleDropdown();

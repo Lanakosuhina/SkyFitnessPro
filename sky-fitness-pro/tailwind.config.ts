@@ -13,8 +13,8 @@ const config: Config = {
       },
       backgroundImage: {
         "input-radio": "url('/img/ellipse.svg')",
-        "notice":"url('/img/notice.png')",
-        "user-icon":"url('/img/user-icon.svg')",
+        "notice": "url('/img/notice.png')",
+        "user-icon": "url('/img/user-icon.svg')",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
@@ -40,6 +40,9 @@ const config: Config = {
         gray: "#D0CECE",
         grayLight: "#F7F7F7",
         selectionBorder: "#C4C4C4",
+      },
+      cursor: {
+        'custom': 'url(/img/customCursor.svg), pointer',
       },
       boxShadow: {
         def: '0 4px 67px -12px rgba(0, 0, 0, 0.13)',
