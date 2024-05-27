@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import logoImg from '../../../public/img/logo.svg';
-import Button from '../Button/Button';
 import { useEffect, useState } from 'react';
 import DropDown from '../DropDown/DropDown';
 import { User, getAuth } from 'firebase/auth';

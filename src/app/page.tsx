@@ -61,7 +61,8 @@ export default function MainCoursesPage() {
         </div>) :
         (
           <>
-            <div
+          <div>
+          <div
               id="top"
               className="flex flex-col md:flex-row "
             >
@@ -72,7 +73,7 @@ export default function MainCoursesPage() {
                 Измени своё тело за полгода!
               </p>
             </div>
-            <div className="grid grid-flow-row gap-6 md:grid-cols-2 xl:grid-cols-3 md:gap-x-[calc(100%-343px*2)]   xl:gap-x-[calc((100%-360px*3)/2)] md:gap-y-8 main:gap-x-10 main:gap-y-8 item-start">
+            <div className="flex md:justify-center lg:justify-start flex-wrap md:gap-y-4 gap-x-10 gap-y-8">
               {courses.map(course => {
                 const isUserIncludedCourse = userSubscriptions.includes(
                   course[0],
@@ -93,6 +94,7 @@ export default function MainCoursesPage() {
                 <Button title="Наверх &#8593;" />
               </Link>
             </div>
+          </div>
           </>
         )}
     </div>
