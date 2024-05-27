@@ -2,7 +2,7 @@
 
 Командная разработка сайт для онлайн школы тренировок "SkyFitnessPro"
 
-## Ссылка на приложение:
+## Ссылка на приложение: sky-fitness-team.vercel.app
 
 ## Установка
 
@@ -97,4 +97,4 @@ npm run build
 - [x] ESlint
 - [x] Prettier
 - [x] Jest
-- [x] Netlify
+- [x] Vercel
