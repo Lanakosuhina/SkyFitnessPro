@@ -65,7 +65,7 @@ export default function Header() {
                       : 'w-[14px] h-[9px] cursor-pointer'
                   } id="icon-arrow" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                     <defs />
-                    <path id="Rectangle 3765" d="M12.06 0.74L5.67 7.12L-0.71 0.74L0.7 -0.68L6.38 5L5.67 5.71L4.97 5L10.64 -0.68L12.06 0.74Z" fill="#000000" fill-opacity="1.000000" fill-rule="evenodd" />
+                    <path id="Rectangle 3765" d="M12.06 0.74L5.67 7.12L-0.71 0.74L0.7 -0.68L6.38 5L5.67 5.71L4.97 5L10.64 -0.68L12.06 0.74Z" fill="#000000" fillOpacity="1.000000" fillRule="evenodd" />
                   </svg>
                 </div>
               </div>
