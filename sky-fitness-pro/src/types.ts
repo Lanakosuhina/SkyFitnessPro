@@ -55,3 +55,13 @@ export type WorkoutType = {
   exercises: ExerciseType[];
   progressWorkout: number;
 };
+
+export type NewWorkoutContentType = {
+  [key: string]: {
+    _id: string;
+    name: string;
+    progressWorkout: number;
+    video: string;
+    exercises: ExerciseType[];
+  };
+};

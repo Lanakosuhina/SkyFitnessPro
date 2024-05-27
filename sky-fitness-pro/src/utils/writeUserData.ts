@@ -1,6 +1,7 @@
 import { database } from "@/app/firebase";
-import { CourseType, ExerciseType, UserWorkoutType } from "@/types";
-import { child, get, ref, set } from "firebase/database";
+import { CourseType, NewWorkoutContentType } from "@/types";
+import { ref, set } from "firebase/database";
+import { getCourseWorkouts } from "./getCourseWorkouts";
 
 type WriteUserDataType = {
   userId: string | undefined;
@@ -8,50 +9,22 @@ type WriteUserDataType = {
   course: CourseType;
 };
 
-type NewWorkoutContentType = {
-  [key: string]: {
-    _id: string;
-    name: string;
-    progressWorkout: number;
-    video: string;
-    exercises: ExerciseType[];
-  };
-};
-
-export async function writeUserData({
+export async function addCourseUser({
   userId,
   courseId,
   course,
 }: WriteUserDataType) {
-  let arrAllWorkouts: UserWorkoutType[] = [];
+  let workoutsList: NewWorkoutContentType = {};
 
-  await get(child(ref(database), 'workouts'))
-    .then(snapshot => {
-      if (snapshot.exists()) {
-        arrAllWorkouts = Object.entries(snapshot.val());
-      } else {
-        console.log('No data available');
-      }
-    })
-    .catch(error => {
-      console.error(error);
-    });
+  await getCourseWorkouts({ course, workoutsList });
 
-  const workoutsList = arrAllWorkouts.filter(workout =>
-    course.workouts.includes(workout[0]),
-  );
-  let newWorkoutslist: NewWorkoutContentType = {};
-  Object.values(workoutsList).forEach(workout => {
-    const workoutNewContent = { ...workout[1], progressWorkout: 0 };
-    const newKey: string = workout[0];
-    newWorkoutslist[newKey] = workoutNewContent;
-  });
+  console.log(workoutsList);
 
   await set(ref(database, `users/${userId}/courses/${courseId}`), {
     _id: course._id,
     nameEN: course.nameEN,
     nameRU: course.nameRU,
-    workouts: newWorkoutslist,
+    workouts: workoutsList,
     progressCourse: 0,
   });
 }

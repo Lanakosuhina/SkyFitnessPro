@@ -14,7 +14,6 @@ import { SignUpUserDataType } from "@/types";
 export default function SignInPage() {
   const router = useRouter();
   const [errorText, setError] = useState('');
-
   const [userData, setUserData] = useState<SignUpUserDataType>({
     email: "",
     password: "",
@@ -25,7 +24,7 @@ export default function SignInPage() {
     event.preventDefault();
 
     if (!userData.email || !userData.password || !userData.repeatPassword)
-      return;
+      return setError('Не все поля заполнены');
 
     if (userData.password !== userData.repeatPassword) {
       return setError('Пароли не совпадают');
@@ -83,7 +82,7 @@ export default function SignInPage() {
             title="Зарегистрироваться"
           />
           <ButtonLink
-            onClick={() => router.replace("/signin")}
+            onClick={() => { router.back(); router.replace("/signin") }} 
             title="Войти"
             link="/signin"
           />

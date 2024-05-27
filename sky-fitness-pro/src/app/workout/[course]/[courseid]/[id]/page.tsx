@@ -1,4 +1,5 @@
 "use client";
+import withPrivateRoute from "@/HOC/withPrivateRoute";
 import { app, database } from "@/app/firebase";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import Button from "@/components/Button/Button";
@@ -9,9 +10,7 @@ import WorkoutProgress from "@/components/WorkoutProgress/WorkoutProgress";
 import { ExerciseType, UserWorkoutType, WorkoutType } from "@/types";
 import { User, getAuth } from "firebase/auth";
 import { onValue, ref, update } from "firebase/database";
-import Image from "next/image";
 import { Suspense, useEffect, useState } from "react";
-import loadingGif from './../../../../../assets/gogi-running.gif';
 
 type WorkoutPageType = {
   params: {
@@ -23,7 +22,7 @@ type WorkoutPageType = {
 
 export type ExerciseArrayType = [string, ExerciseType];
 
-export default function WorkoutPage({ params }: WorkoutPageType) {
+function WorkoutPage({ params }: WorkoutPageType) {
   const auth = getAuth(app);
   const workoutId = params.id;
   const courseId = params.courseid;
@@ -36,7 +35,6 @@ export default function WorkoutPage({ params }: WorkoutPageType) {
   const [rusName, setRusName] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     auth.onAuthStateChanged(user => {
@@ -91,7 +89,6 @@ export default function WorkoutPage({ params }: WorkoutPageType) {
         if (snapshot.exists()) {
           const exercisesData: ExerciseArrayType[] = Object.entries(snapshot.val());
           setExercises(exercisesData);
-          setIsLoading(false);      
         } else {
           console.log('No data available');
         }
@@ -186,67 +183,62 @@ export default function WorkoutPage({ params }: WorkoutPageType) {
   }, [auth.currentUser?.uid, workoutId, courseId]);
 
   return (
-    <div>
-      {isLoading ?
-        (<div className="block ml-[auto] mr-[auto] lg:w-[300px] lg:h-[300px] w-[150px] h-[150px]" >
-          <Image src={loadingGif} alt="wait until the page loads" width={300} height={300} />
-        </div>) :
-        (<>
-          <section>
-            <Title label={rusName} />
-            <Breadcrumbs text={workout ? workout.name : ''} />
-            <div className="h-[189px] md:h-[639px] rounded-[30px] mb-6 lg:mb-10">
-              <Suspense fallback={<p>Loading video...</p>}>
-                <VideoComponent videoURL={workout ? workout.video : ''} />
-              </Suspense>
-            </div>
-          </section>
-          <section className="rounded-[30px] p-[30px] lg:p-10 bg-white shadow-def ">
-            <h2 className="text-[32px] text-black font-skyeng font-normal mb-[20px]">
-              Упражнения тренировки
-            </h2>
-            <div className="grid grid-flow-row gap-6 items-end md:grid-cols-2 md:gap-5 xl:grid-cols-3">
-              {exercises.length > 0 &&
-                exercises.map((exercise, i) => {
-                  // const arrAvr = exercises.map((exercise) =>
-                  //   exercise[1].curProgress < exercise[1].quantity
-                  //     ? (exercise[1].curProgress / exercise[1].quantity) * 100
-                  //     : 100
-                  // );
-                  const progress = Math.floor(
-                    exercise[1].curProgress < exercise[1].quantity
-                      ? (exercise[1].curProgress / exercise[1].quantity) * 100
-                      : 100,
-                  )
-                    .toString()
-                    .concat('%');
+    <>
+      <section>
+        <Title label={rusName} />
+        <Breadcrumbs text={workout ? workout.name : ''} />
+        <div className="h-[189px] md:h-[639px] rounded-[30px] mb-6 lg:mb-10">
+          <Suspense fallback={<p>Loading video...</p>}>
+            <VideoComponent videoURL={workout ? workout.video : ''} />
+          </Suspense>
+        </div>
+      </section>
+      <section className="rounded-[30px] p-[30px] lg:p-10 bg-white shadow-def ">
+        <h2 className="text-[32px] text-black font-skyeng font-normal mb-[20px]">
+          Упражнения тренировки
+        </h2>
+        <div className="grid grid-flow-row gap-6 items-end md:grid-cols-2 md:gap-5 xl:grid-cols-3">
+          {exercises.length > 0 &&
+            exercises.map((exercise, i) => {
+              // const arrAvr = exercises.map((exercise) =>
+              //   exercise[1].curProgress < exercise[1].quantity
+              //     ? (exercise[1].curProgress / exercise[1].quantity) * 100
+              //     : 100
+              // );
+              const progress = Math.floor(
+                exercise[1].curProgress < exercise[1].quantity
+                  ? (exercise[1].curProgress / exercise[1].quantity) * 100
+                  : 100,
+              )
+                .toString()
+                .concat('%');
 
-                  return (
-                    <div className="lg:w-[320px] w-[283px]" key={i}>
-                      <WorkoutProgress
-                        title={exercise[1].name}
-                        progress={progress}
-                      />
-                    </div>
-                  );
-                })}
-            </div>
-            <div className="lg:w-[320px] max-w-[283px] w-auto mt-10">
-              <Button
-                title="Заполнить свой прогресс"
-                onClick={toggleProgressForm}
-              />
-            </div>
-          </section>
-          {isOpen && (
-            <ProgressForm
-              isOpen={isSuccess}
-              setExercises={setExercises}
-              handleSaveChanges={handleSaveChanges}
-              exercises={exercises}
-            />
-          )}
-        </>)}
-    </div>
-  )
-};
+              return (
+                <div className="lg:w-[320px] w-[283px]" key={i}>
+                  <WorkoutProgress
+                    title={exercise[1].name}
+                    progress={progress}
+                  />
+                </div>
+              );
+            })}
+        </div>
+        <div className="lg:w-[320px] max-w-[283px] w-auto mt-10">
+          <Button
+            title="Заполнить свой прогресс"
+            onClick={toggleProgressForm}
+          />
+        </div>
+      </section>
+      {isOpen && (
+        <ProgressForm
+          isOpen={isSuccess}
+          setExercises={setExercises}
+          handleSaveChanges={handleSaveChanges}
+          exercises={exercises}
+        />
+      )}
+    </>)
+}
+
+export default withPrivateRoute(WorkoutPage);

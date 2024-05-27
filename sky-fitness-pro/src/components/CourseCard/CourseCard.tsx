@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 import Link from "next/link";
 import WorkoutProgress from "../WorkoutProgress/WorkoutProgress";
 import { removeSubscribedCourse } from "@/utils/removeSubscribedCourse";
-import { writeUserData } from "@/utils/writeUserData";
+import { addCourseUser } from "@/utils/writeUserData";
 import { getAuth } from "firebase/auth";
 import { CourseType } from "@/types";
 import { useRouter } from "next/navigation";
@@ -20,7 +20,7 @@ type CourseCardType = {
 export default function CourseCard({
   course,
   courseId,
-  progress = '0',
+  progress,
   isSubscribed,
   imgURL,
   title,
@@ -40,14 +40,13 @@ export default function CourseCard({
     if (!course) return;
     if (!userId.currentUser) return router.replace('/signin');
 
-    await writeUserData({ userId: userId.currentUser?.uid, courseId, course });
+    await addCourseUser({ userId: userId.currentUser?.uid, courseId, course });
   }
 
   return (
     <div
       onClick={() => router.replace(`/course/${courseId}`)}
-      className="relative w-[343px]  md:w-[360px] bg-[#FFFFFF] rounded-[30px] hover:translate-y-1 hover:scale-105 duration-300 hover:shadow-lg "
-    >
+      className="relative w-[343px] md:w-[343px] bg-[#FFFFFF] rounded-[30px] hover:translate-y-1 hover:scale-105 duration-300 hover:shadow-lg "    >
       <div title="">
         <Image
           className="rounded-[30px] h-[325px]"
@@ -109,7 +108,7 @@ export default function CourseCard({
             <p className="text-base leading-[110%] lg:text-[18px]">Сложность</p>
           </div>
         </div>
-        {isSubscribed && (
+        {progress && (
           <div className="flex flex-col gap-10">
             <WorkoutProgress title="Прогресс" progress={progress} />
             <Link

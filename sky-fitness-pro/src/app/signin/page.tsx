@@ -1,5 +1,4 @@
 'use client';
-'use client';
 
 import WrapperModal from "@/components/WrapperModal/WrapperModal";
 import FormInput from "@/components/FormInput/FormInput";
@@ -16,7 +15,7 @@ export default function SignInPage() {
   const router = useRouter();
   const [errorText, setError] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
-  const [userData, setUserData] = useState<DataUserType>({
+  const [userData, setUserData] = useState<SignInUserDataType>({
     email: "",
     password: "",
   });
@@ -35,7 +34,7 @@ export default function SignInPage() {
     return router.replace('/');
   };
 
-  function toSendPasswordResetEmail(userData: DataUserType) {
+  function toSendPasswordResetEmail(userData: SignInUserDataType) {
     if (userData.email) {
       const auth = getAuth();
       sendPasswordResetEmail(auth, userData.email)

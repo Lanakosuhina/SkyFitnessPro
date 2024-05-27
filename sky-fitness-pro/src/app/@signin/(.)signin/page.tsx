@@ -37,7 +37,7 @@ export default function SignInPage() {
   };
 
 
-  function toSendPasswordResetEmail(userData: DataUserType) {
+  function toSendPasswordResetEmail(userData: SignInUserDataType) {
     if (userData.email) {
       const auth = getAuth();
       sendPasswordResetEmail(auth, userData.email)

@@ -27,8 +27,13 @@ export default function SetNewPassword() {
     repeatPassword: '',
   });
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.replace('/profile')
+  };
+  
   return (
-    <WrapperModal>
+    <WrapperModal onSubmit={handleSubmit}>
       <div className="mb-[34px]">
         <FormInput
           type="password"
@@ -60,7 +65,7 @@ export default function SetNewPassword() {
       </div>
 
       <div className="space-y-2.5">
-        <Button onClick={() => console.log('object')} title="Подтвердить" />
+        <Button title="Подтвердить" />
       </div>
     </WrapperModal>
   );
