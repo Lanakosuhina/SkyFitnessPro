@@ -2,7 +2,7 @@
 
 Командная разработка сайт для онлайн школы тренировок "SkyFitnessPro"
 
-## Ссылка на приложение: sky-fitness-team.vercel.app
+## Ссылка на приложение: [sky-fitness-team.vercel.app](sky-fitness-team.vercel.app) 
 
 ## Установка
 
