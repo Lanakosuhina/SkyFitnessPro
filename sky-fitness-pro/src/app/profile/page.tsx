@@ -39,22 +39,20 @@ function ProfilePage() {
 
   useEffect(() => {
     if (!auth.currentUser?.uid) return;
-    const handleValueChange = (snapshot: { exists: () => any; val: () => { [s: string]: CourseType; } | ArrayLike<CourseType>; }) => {
-      if (snapshot.exists()) {
-        const userCourseList: CoursesArrayType = Object.entries(snapshot.val());
-        setCourses(userCourseList);
-      } else {
-        console.log('No data available');
-        setCourses([]);
-      }
-    };
-    const unsubscribe = onValue(
+    return onValue(
       ref(database, `users/${auth.currentUser?.uid}/courses`),
-      handleValueChange,
+      snapshot => {
+        if (snapshot.exists()) {
+          const userCourseList: CoursesArrayType = Object.entries(
+            snapshot.val(),
+          );
+          setCourses(userCourseList);
+        } else {
+          console.log('No data available');
+          setCourses([]);
+        }
+      },
     );
-    return () => {
-      unsubscribe();
-    };
   }, [auth.currentUser?.uid]);
 
   return (
@@ -93,7 +91,7 @@ function ProfilePage() {
                 <p className="sm:text-[18px] text-[16px]">{`Пароль: ********`}</p>
               </div>
               <div className="flex flex-wrap flex-row sm:space-x-[10px] space-x-0 sm:gap-0 gap-[15px]">
-                <Link href="/reset">
+                <Link href="/reset" className="sm:w-[192px] w-[283px]">
                   <Button title="Изменить пароль" />
                 </Link>
                 <div className="sm:w-[192px] w-[283px]">
@@ -107,20 +105,20 @@ function ProfilePage() {
           Мои курсы
         </h2>
         {courses.length === 0 && <p className="sm:text-[18px] text-[16px]">У вас нет добавленных курсов </p>}
-        <div className="flex flex-wrap flex-row gap-[41px]">
+        <div className="grid grid-flow-row gap-6 md:grid-cols-2 xl:grid-cols-3 md:gap-x-[calc(100%-343px*2)] lg:gap-x-[calc(100%-360px*2)] xl:gap-x-[calc((100%-360px*3)/2)] md:gap-y-8 main:gap-x-10 main:gap-y-8 item-start">        
           {courses.map(course => {
-            const progress = course[1].progressCourse.toString().concat('%');
-            return (
-              <CourseCard
-                key={course[0]}
-                title={course[1].nameRU}
-                imgURL={course[1].nameEN}
-                isSubscribed={true}
-                courseId={course[0]}
-                progress={progress}
-              />
-            );
-          })}
+          const progress = course[1].progressCourse.toString().concat('%');
+          return (
+            <CourseCard
+              key={course[0]}
+              title={course[1].nameRU}
+              imgURL={course[1].nameEN}
+              isSubscribed={true}
+              courseId={course[0]}
+              progress={progress}
+            />
+          );
+        })}
         </div>
       </div>
     </>

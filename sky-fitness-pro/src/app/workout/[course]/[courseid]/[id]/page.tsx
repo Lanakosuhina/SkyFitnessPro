@@ -10,7 +10,7 @@ import WorkoutProgress from "@/components/WorkoutProgress/WorkoutProgress";
 import { ExerciseType, UserWorkoutType, WorkoutType } from "@/types";
 import { User, getAuth } from "firebase/auth";
 import { onValue, ref, update } from "firebase/database";
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 type WorkoutPageType = {
   params: {
