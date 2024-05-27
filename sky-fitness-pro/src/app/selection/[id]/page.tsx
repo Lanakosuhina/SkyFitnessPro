@@ -63,7 +63,7 @@ export default function SelectionPage({ params }: SelectionPageType) {
   return (
     <div className="relative">
       <div
-        className="fixed top-[calc(50%-(585px/2))] left-[calc(50%-(343px/2))] md:top-[calc(50%-(609px/2))] md:left-[calc(50%-(460px/2))]
+        className="fixed top-[116px] md:top-[183px] left-[calc(50%-(343px/2))]  md:left-[calc(50%-(460px/2))]
      bg-white  rounded-[30px] shadow-def w-[343px] md:w-[460px]  p-[30px] md:p-[40px] "
       >
         <h2 className="font-skyeng text-[32px] leading-[110%] text-center mb-[34px] md:mb-[48px]">
@@ -92,7 +92,4 @@ export default function SelectionPage({ params }: SelectionPageType) {
       </div>
     </div>
   );
-  {
-    /* <div className="bg-[#FFFFFF] rounded-[30px]  lg:w-[460px] w-[343px] lg:h-[609px] h-[585px]"> */
-  }
 }
