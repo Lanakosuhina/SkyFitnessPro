@@ -10,6 +10,7 @@ import Link from "next/link";
 import { onValue, ref } from "firebase/database";
 import { UserWorkoutType } from "@/types";
 import withPrivateRoute from './../../HOC/withPrivateRoute';
+import { logOut } from "../api";
 
 type CourseType = {
   _id: string;
@@ -95,7 +96,7 @@ function ProfilePage() {
                   <Button title="Изменить пароль" />
                 </Link>
                 <div className="sm:w-[192px] w-[283px]">
-                  <ButtonLink title="Выйти" link="/" />
+                  <ButtonLink title="Выйти" link="/" onClick={() => {logOut()}} />
                 </div>
               </div>
             </div>
