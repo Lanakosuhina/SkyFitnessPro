@@ -18,7 +18,6 @@ export default function ProgressForm({
   isOpen,
 }: ProgressFormType) {
   useEffect(() => setExercises(exercises), [exercises, setExercises]);
-
   return (
     <div className="relative">
       {isOpen ? (
