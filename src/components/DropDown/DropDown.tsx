@@ -16,7 +16,6 @@ export default function DropDown({
 }: DropDownType) {
   const router = useRouter();
   const handleLogout = () => {
-    console.log('проверка выхода');
     logOut()
       .then(() => {
         router.replace('/');

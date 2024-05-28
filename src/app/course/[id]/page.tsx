@@ -5,25 +5,17 @@ import { workoutDescription } from "@/lib/data";
 import { app, database } from "@/app/firebase";
 import { onValue, ref } from "firebase/database";
 import { useEffect, useState } from "react";
-import { User, getAuth } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { addCourseUser } from "@/utils/writeUserData";
 import sendNotification from "@/utils/sendNotification";
 import { useRouter } from "next/navigation";
-import { CourseType, UserWorkoutType } from "@/types";
+import { CourseType, UserCourseType } from "@/types";
 import withPrivateRoute from "@/HOC/withPrivateRoute";
 
 type CoursePageType = {
   params: {
     id: string;
   };
-};
-
-type UserCourseType = {
-  _id: string;
-  nameEN: string;
-  nameRU: string;
-  progress: string;
-  workouts: UserWorkoutType[];
 };
 
 function CoursePage({ params }: CoursePageType) {
@@ -40,21 +32,11 @@ function CoursePage({ params }: CoursePageType) {
     workouts: ['', '', ''],
   });
   const [color, setColor] = useState('bg-white');
-  const [user, setUser] = useState<User | null>(null);
   const [userCourses, setUserCourses] = useState<UserCourseType[]>([]);
 
   const auth = getAuth(app);
   const currentUser = auth.currentUser;
 
-  useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(user);
-      }
-    });
-  }, [auth]);
 
   useEffect(() => {
     const courseDbRef = ref(database, 'courses/' + courseId);
@@ -115,15 +97,15 @@ function CoursePage({ params }: CoursePageType) {
       >
       </div>
       <section
-        className={`relative w-auto h-[389px] lg:h-[310px] rounded-[30px] ${color} overflow-hidden`}
+        className={`flex flex-row justify-end md:justify-between w-auto h-[330px] lg:h-[310px] rounded-[30px] ${color} overflow-hidden`}
       >
         <h1 className="font-roboto-500 hidden md:text-4xl lg:text-6xl  md:block font-medium text-white mb-[10px] pt-[40px] pl-[40px]">
           {course.nameRU}
         </h1>
         <Image
-          className="absolute top-[45px] right-[10px] lg:right-[1px] md:right-[10px] lg:top-[-80px] md:top-[10px]
-          w-[360px] h-[350px]
-  lg:w-[410px] lg:h-[400px]"
+          className="
+          w-[343px] h-[330px]
+  lg:w-[360px] lg:h-[330px]"
           src={`/img/${course.nameEN}.png`}
           alt="yoga"
           width={560}

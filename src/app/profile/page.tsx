@@ -1,16 +1,16 @@
-"use client";
-import Image from "next/image";
-import Button from "@/components/Button/Button";
-import ButtonLink from "@/components/ButtonLink/ButtonLink";
-import CourseCard from "@/components/CourseCard/CourseCard";
-import { useEffect, useState } from "react";
-import { User, getAuth } from "firebase/auth";
-import { app, database } from "../firebase";
-import Link from "next/link";
-import { onValue, ref } from "firebase/database";
-import { UserWorkoutType } from "@/types";
+'use client';
+import Image from 'next/image';
+import Button from '@/components/Button/Button';
+import ButtonLink from '@/components/ButtonLink/ButtonLink';
+import CourseCard from '@/components/CourseCard/CourseCard';
+import { useEffect, useState } from 'react';
+import { User, getAuth } from 'firebase/auth';
+import { app, database } from '../firebase';
+import Link from 'next/link';
+import { onValue, ref } from 'firebase/database';
+import { UserWorkoutType } from '@/types';
 import withPrivateRoute from './../../HOC/withPrivateRoute';
-import { logOut } from "../api";
+import { logOut } from '../api';
 
 type CourseType = {
   _id: string;
@@ -31,7 +31,6 @@ function ProfilePage() {
     auth.onAuthStateChanged(user => {
       if (user) {
         setUser(user);
-
       } else {
         setUser(user);
       }
@@ -65,7 +64,6 @@ function ProfilePage() {
         <div
           className="bg-[#FFFFFF]
                     rounded-[30px]
-                    sm:h-[257px] h-[453px]
                     sm:px-[30px] px-[10px]
                     py-[30px]"
         >
@@ -91,12 +89,18 @@ function ProfilePage() {
                 <p className="sm:text-[18px] text-[16px]">{`Логин: ${user?.email}`}</p>
                 <p className="sm:text-[18px] text-[16px]">{`Пароль: ********`}</p>
               </div>
-              <div className="flex flex-wrap flex-row sm:space-x-[10px] space-x-0 sm:gap-0 gap-[15px]">
+              <div className="flex flex-wrap flex-col align-center md:flex-row gap-[15px]">
                 <Link href="/reset" className="sm:w-[192px] w-[283px]">
                   <Button title="Изменить пароль" />
                 </Link>
                 <div className="sm:w-[192px] w-[283px]">
-                  <ButtonLink title="Выйти" link="/" onClick={() => {logOut()}} />
+                  <ButtonLink
+                    title="Выйти"
+                    link="/"
+                    onClick={() => {
+                      logOut();
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -105,21 +109,25 @@ function ProfilePage() {
         <h2 className="sm:mt-[53px] mt-[23px] sm:mb-[31px] mb-[12px] sm:text-[40px] text-[24px] font-bold">
           Мои курсы
         </h2>
-        {courses.length === 0 && <p className="sm:text-[18px] text-[16px]">У вас нет добавленных курсов </p>}
-        <div className="grid grid-flow-row gap-6 md:grid-cols-2 xl:grid-cols-3 md:gap-x-[calc(100%-343px*2)] lg:gap-x-[calc(100%-360px*2)] xl:gap-x-[calc((100%-360px*3)/2)] md:gap-y-8 main:gap-x-10 main:gap-y-8 item-start">        
+        {courses.length === 0 && (
+          <p className="sm:text-[18px] text-[16px]">
+            У вас нет добавленных курсов{' '}
+          </p>
+        )}
+        <div className="grid grid-flow-row gap-6 md:grid-cols-2 xl:grid-cols-3 md:gap-x-[calc(100%-343px*2)] lg:gap-x-[calc(100%-360px*2)] xl:gap-x-[calc((100%-360px*3)/2)] md:gap-y-8 main:gap-x-10 main:gap-y-8 item-start">
           {courses.map(course => {
-          const progress = course[1].progressCourse.toString().concat('%');
-          return (
-            <CourseCard
-              key={course[0]}
-              title={course[1].nameRU}
-              imgURL={course[1].nameEN}
-              isSubscribed={true}
-              courseId={course[0]}
-              progress={progress}
-            />
-          );
-        })}
+            const progress = course[1].progressCourse.toString().concat('%');
+            return (
+              <CourseCard
+                key={course[0]}
+                title={course[1].nameRU}
+                imgURL={course[1].nameEN}
+                isSubscribed={true}
+                courseId={course[0]}
+                progress={progress}
+              />
+            );
+          })}
         </div>
       </div>
     </>
