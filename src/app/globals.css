@@ -16,7 +16,7 @@ html {
 
 body {
   color: black;
-  background: #fafafa;
+  background: rgb(250, 250, 250);
 }
 
 @layer utilities {

@@ -9,7 +9,6 @@ import { CourseType } from '@/types';
 import Image from 'next/image';
 import loadingGif from './../assets/gogi-running.gif';
 import { User, getAuth } from 'firebase/auth';
-import { NEXT_CACHE_REVALIDATE_TAG_TOKEN_HEADER } from 'next/dist/lib/constants';
 
 type CoursesArrayType = [string, CourseType][];
 
@@ -73,7 +72,7 @@ export default function MainCoursesPage() {
                 Измени своё тело за полгода!
               </p>
             </div>
-            <div className="flex md:justify-center lg:justify-start flex-wrap md:gap-y-4 gap-x-10 gap-y-8">
+            <div className="flex md:justify-center lg:justify-start flex-wrap md:gap-y-10 gap-x-10">
               {courses.map(course => {
                 const isUserIncludedCourse = userSubscriptions.includes(
                   course[0],

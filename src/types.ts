@@ -32,14 +32,7 @@ export type ButtonType = {
 };
 
 export type UserWorkoutType = [
-  string,
-  {
-    name: string;
-    video: string;
-    _id: string;
-    progressWorkout: number;
-    exercises: ExerciseType[];
-  }
+  string, WorkoutType
 ];
 
 export type ExerciseType = {
@@ -64,4 +57,12 @@ export type NewWorkoutContentType = {
     video: string;
     exercises: ExerciseType[];
   };
+};
+
+export type UserCourseType = {
+  _id: string;
+  nameEN: string;
+  nameRU: string;
+  progress: string;
+  workouts: UserWorkoutType[];
 };

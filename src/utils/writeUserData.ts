@@ -18,8 +18,6 @@ export async function addCourseUser({
 
   await getCourseWorkouts({ course, workoutsList });
 
-  console.log(workoutsList);
-
   await set(ref(database, `users/${userId}/courses/${courseId}`), {
     _id: course._id,
     nameEN: course.nameEN,
