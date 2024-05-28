@@ -42,7 +42,6 @@ export default function ResetPage() {
       updatePassword(currentUser, newPassword.password)
         .then(() => {
           // Update successful.
-          console.log('success1');
           return router.replace('/profile');
         })
         .catch(error => {

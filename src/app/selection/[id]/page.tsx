@@ -1,12 +1,12 @@
-"use client";
-import { app, database } from "@/app/firebase";
-import Button from "@/components/Button/Button";
-import WorkoutItem from "@/components/WorkoutItem/WorkoutItem";
-import { WorkoutType } from "@/types";
-import { User, getAuth } from "firebase/auth";
-import { onValue, ref } from "firebase/database";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+'use client';
+import { app, database } from '@/app/firebase';
+import Button from '@/components/Button/Button';
+import WorkoutItem from '@/components/WorkoutItem/WorkoutItem';
+import { WorkoutType } from '@/types';
+import { getAuth } from 'firebase/auth';
+import { onValue, ref } from 'firebase/database';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 type SelectionPageType = {
   params: {
@@ -15,50 +15,35 @@ type SelectionPageType = {
 };
 
 export default function SelectionPage({ params }: SelectionPageType) {
-  const [courseId, setCourseId] = useState('');
+  const courseId = params.id;
   const auth = getAuth(app);
   const [workouts, setWorkouts] = useState<WorkoutType[]>([]);
-  const [courseName, setCourseName] = useState<string | number | WorkoutType>("");
-  const [selected, setSelected] = useState("");
+  const [courseName, setCourseName] = useState<string | number | WorkoutType>(
+    '',
+  );
+  const [selected, setSelected] = useState('');
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(user);
-      }
-    });
-  }, [auth]);
-
-  useEffect(() => {
-    setCourseId(params.id);
-  }, [params]);
-
-  const fetchCourse = useCallback(() => {
     if (!auth.currentUser?.uid) return;
     return onValue(
-      ref(database, `users/${auth.currentUser?.uid}/courses/${courseId}/`),
+      ref(database, `users/${auth.currentUser?.uid}/courses/${courseId}`),
       snapshot => {
         if (snapshot.exists()) {
-          const course: (string | number | WorkoutType)[] = Object.values(snapshot.val());
+          const course: (string | number | WorkoutType)[] = Object.values(
+            snapshot.val(),
+          );
           setCourseName(course[1]);
+          console.log(course);
           const workoutList: WorkoutType[] = Object.values(course[4]);
           workoutList.sort((a, b) => (a.name > b.name ? 1 : -1));
-          console.log(workoutList);
           setWorkouts(workoutList);
         } else {
           console.log('No data available');
         }
       },
     );
-  }, [auth.currentUser?.uid, courseId]);
-  
-  useEffect(() => {
-    fetchCourse();
-  }, [fetchCourse]);
+  }, []);
 
   return (
     <div className="relative">
@@ -71,10 +56,10 @@ export default function SelectionPage({ params }: SelectionPageType) {
         </h2>
         <ul className="max-h-[360px] mb-[34px]  overflow-y-scroll">
           {workouts?.map((workout, i) => {
-            const shortWorkoutName = workout.name.split("/")[0];
+            const shortWorkoutName = workout.name.split('/')[0];
             return (
               <WorkoutItem
-              isDone={workout.progressWorkout === 100}
+                isDone={workout.progressWorkout === 100}
                 setSelected={setSelected}
                 workoutName={shortWorkoutName}
                 key={i}

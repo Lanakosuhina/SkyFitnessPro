@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Компонент input type=radio корректно рендериться с начальными значениями 1`] = `
+<li
+  className="relative  h-16 border-solid border-b border-selectionBorder py-[10px] ml-1 mr-[26px] flex flex-col justify-center"
+>
+  <input
+    className="hidden"
+    id="workoutdfhjk8"
+    name="selectWorkout"
+    onChange={[Function]}
+    type="radio"
+    value="dfhjk8"
+  />
+  <label
+    className="p-3 pl-[34px] blok rounded-[30px]  font-roboto-400 text-[18px] md:text-[24px]  leading-[110%]"
+    htmlFor="workoutdfhjk8"
+  >
+    Тренировка мышц ягодиц
+    <svg
+      className="absolute top-[22px] left-2"
+      fill="none"
+      height="20"
+      viewBox="0 0 20 20"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        clipRule="evenodd"
+        d="M10 20C15.5228 20 20 15.5228 20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20ZM9.91339 14.1459L15.4134 7.64594L13.8866 6.35406L9.1373 11.9669L6.40258 8.8415L4.89742 10.1585L8.39742 14.1585C8.58922 14.3777 8.86704 14.5024 9.15829 14.5C9.44953 14.4976 9.72525 14.3683 9.91339 14.1459Z"
+        fill="#D0CECE"
+        fillRule="evenodd"
+      />
+    </svg>
+  </label>
+</li>
+`;

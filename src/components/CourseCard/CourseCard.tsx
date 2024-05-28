@@ -7,6 +7,7 @@ import { addCourseUser } from "@/utils/writeUserData";
 import { getAuth } from "firebase/auth";
 import { CourseType } from "@/types";
 import { useRouter } from "next/navigation";
+import sendNotification from "@/utils/sendNotification";
 
 type CourseCardType = {
   imgURL: string;
@@ -41,12 +42,13 @@ export default function CourseCard({
     if (!userId.currentUser) return router.replace('/signin');
 
     await addCourseUser({ userId: userId.currentUser?.uid, courseId, course });
+    sendNotification('info', 'Вы добавили курс!')
   }
 
   return (
     <div
       onClick={() => router.replace(`/course/${courseId}`)}
-      className="relative w-[343px] md:w-[343px] bg-[#FFFFFF] rounded-[30px] hover:translate-y-1 hover:scale-105 duration-300 hover:shadow-lg "    >
+      className="relative w-[343px] md:w-[343px] bg-[#FFFFFF] rounded-[30px] hover:scale-104 duration-300 hover:shadow-lg "    >
       <div title="">
         <Image
           className="rounded-[30px] h-[325px]"

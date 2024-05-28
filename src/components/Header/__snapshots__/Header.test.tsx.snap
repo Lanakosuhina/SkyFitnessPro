@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Компонент шапки приложения корректно рендериться 1`] = `
+<div
+  className="flex justify-between mx-auto py-10 md:pt-[50px] md:pb-14 lg:max-w-[1440px] px-4 md:px-8 main:px-[140px]"
+>
+  <div>
+    <a
+      href="/"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onTouchStart={[Function]}
+    >
+      <img
+        alt="logo"
+        className="w-[220px] h-[35px]"
+        data-nimg="1"
+        decoding="async"
+        height={35}
+        loading="lazy"
+        onError={[Function]}
+        onLoad={[Function]}
+        src="/_next/image?url=%2Fimg.jpg&w=640&q=75"
+        srcSet="/_next/image?url=%2Fimg.jpg&w=256&q=75 1x, /_next/image?url=%2Fimg.jpg&w=640&q=75 2x"
+        style={
+          {
+            "color": "transparent",
+          }
+        }
+        width={220}
+      />
+    </a>
+    <p
+      className="font-roboto-400 text-lg hidden md:block pt-3.5 text-[#585959]"
+    >
+      Онлайн-тренировки для занятий дома
+    </p>
+  </div>
+  <div
+    className="w-[83px] md:w-[103px]"
+  >
+    <a
+      href="/signin"
+      onClick={[Function]}
+      onMouseEnter={[Function]}
+      onTouchStart={[Function]}
+    >
+      <button
+        className="justify-self-center font-roboto-400 text-lg leading-4 rounded-full w-full h-9 py-2 px-4 md:h-[52px] md:px-5 bg-lime  text-black hover:bg-limeHover active:bg-black active:text-white cursor-custom"
+      >
+        Войти
+      </button>
+    </a>
+  </div>
+</div>
+`;

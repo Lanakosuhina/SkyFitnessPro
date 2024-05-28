@@ -118,8 +118,6 @@ function WorkoutPage({ params }: WorkoutPageType) {
   function toggleProgressForm() {
     setIsOpen(prevState => !prevState);
   }
-  console.log(rusName);
-  console.log(courseName);
   async function handleSaveChanges() {
     const arrAvr = exercises.map(exercise =>
       exercise[1].curProgress < exercise[1].quantity
