@@ -7,6 +7,7 @@ import { addCourseUser } from "@/utils/writeUserData";
 import { getAuth } from "firebase/auth";
 import { CourseType } from "@/types";
 import { useRouter } from "next/navigation";
+import sendNotification from "@/utils/sendNotification";
 
 type CourseCardType = {
   imgURL: string;
@@ -41,6 +42,7 @@ export default function CourseCard({
     if (!userId.currentUser) return router.replace('/signin');
 
     await addCourseUser({ userId: userId.currentUser?.uid, courseId, course });
+    sendNotification('info', 'Вы добавили курс!')
   }
 
   return (

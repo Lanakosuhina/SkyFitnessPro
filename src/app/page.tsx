@@ -48,6 +48,7 @@ export default function MainCoursesPage() {
       if (snapshot.exists()) {
         const userCoursesArray: string[] = Object.keys(snapshot.val());
         setUserSubscriptions(userCoursesArray);
+        
       } else setUserSubscriptions([]);
     });
   }, [userAuth]);
@@ -60,6 +61,12 @@ export default function MainCoursesPage() {
         </div>) :
         (
           <>
+          {}
+           <div
+              id="notification-box"
+              className="flex fixed flex-col items-center justify-center top-0 z-50 p-3"
+            >
+            </div>
           <div>
           <div
               id="top"
