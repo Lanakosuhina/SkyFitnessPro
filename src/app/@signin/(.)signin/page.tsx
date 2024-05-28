@@ -32,8 +32,8 @@ export default function SignInPage() {
       return setError(true);
     }
 
-    return router.back()
-
+    const dialog: HTMLDialogElement | null = document.querySelector("dialog")
+    dialog?.close()
   };
 
 

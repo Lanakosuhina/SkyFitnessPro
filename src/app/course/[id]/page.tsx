@@ -10,7 +10,6 @@ import { addCourseUser } from "@/utils/writeUserData";
 import sendNotification from "@/utils/sendNotification";
 import { useRouter } from "next/navigation";
 import { CourseType, UserCourseType } from "@/types";
-import withPrivateRoute from "@/HOC/withPrivateRoute";
 
 type CoursePageType = {
   params: {
@@ -18,7 +17,7 @@ type CoursePageType = {
   };
 };
 
-function CoursePage({ params }: CoursePageType) {
+export default function CoursePage({ params }: CoursePageType) {
   const courseId = params.id;
   const router = useRouter();
   const [course, setCourse] = useState<CourseType>({
@@ -215,4 +214,3 @@ function CoursePage({ params }: CoursePageType) {
     </>
   )
 }
-export default withPrivateRoute(CoursePage);
