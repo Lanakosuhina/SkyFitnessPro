@@ -39,7 +39,7 @@ export default function CourseCard({
 
     const userId = getAuth();
     if (!course) return;
-    if (!userId.currentUser) return router.replace('/signin');
+    if (!userId.currentUser) return router.replace('/signin', {scroll: false});
 
     await addCourseUser({ userId: userId.currentUser?.uid, courseId, course });
     sendNotification('info', 'Вы добавили курс!')
