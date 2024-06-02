@@ -11,9 +11,9 @@ export function getErrorText({ errorCode, fncSetErrorText }: GetErrorTextType) {
       );
       break;
     case 'auth/email-already-in-use':
-      fncSetErrorText('Данная почта уже используется. Попробуйте войти.');
+      fncSetErrorText('Данная почта уже используется. Попробуйте войти');
     case 'auth/invalid-email':
-      fncSetErrorText('Данная почта уже используется. Попробуйте войти.');
+      fncSetErrorText('Указанная почта некорректна, укажите другую');
       break;
     case 'auth/operation-not-allowed':
       fncSetErrorText('Учетные записи электронной почты и паролей не включены');
