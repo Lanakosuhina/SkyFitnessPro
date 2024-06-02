@@ -82,7 +82,7 @@ export default function SignInPage() {
             title="Зарегистрироваться"
           />
           <ButtonLink
-            onClick={() => { router.back(); router.replace("/signin") }} 
+            onClick={() => { router.back(); router.replace("/signin", {scroll: false})} }
             title="Войти"
             link="/signin"
           />

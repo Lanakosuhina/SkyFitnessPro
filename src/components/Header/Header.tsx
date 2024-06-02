@@ -79,7 +79,7 @@ export default function Header() {
           </>
         ) : (
           <div className="w-[83px] md:w-[103px]">
-            <Link href="/signin">
+            <Link href="/signin" scroll={false}>
               <ButtonHeader title="Войти" />
             </Link>
           </div>
