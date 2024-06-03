@@ -72,7 +72,8 @@ function ProfilePage() {
               className="relative 
                         sm:w-[197px] w-[141px] 
                         sm:h-[197px] h-[141px]
-                        sm:mx-[0px] mx-[90px]"
+                        sm:mx-[0px] mx-[90px] 
+                        select-none"
             >
               <Image fill src="/img/no_foto.png" alt="no foto" />
             </div>

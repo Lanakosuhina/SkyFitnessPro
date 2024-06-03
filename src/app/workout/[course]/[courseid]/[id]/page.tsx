@@ -185,7 +185,7 @@ function WorkoutPage({ params }: WorkoutPageType) {
       <section>
         <Title label={rusName} />
         <Breadcrumbs text={workout ? workout.name : ''} />
-        <div className="h-[189px] md:h-[639px] rounded-[30px] mb-6 lg:mb-10">
+        <div className="h-[189px] md:h-[639px] rounded-[30px] mb-6 lg:mb-10 select-none">
           <Suspense fallback={<p>Loading video...</p>}>
             <VideoComponent videoURL={workout ? workout.video : ''} />
           </Suspense>

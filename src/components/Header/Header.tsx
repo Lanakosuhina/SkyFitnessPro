@@ -31,7 +31,7 @@ export default function Header() {
   return (
     <>
       <div className="flex justify-between mx-auto py-10 md:pt-[50px] md:pb-14 lg:max-w-[1440px] px-4 md:px-8 main:px-[140px]">
-        <div>
+        <div className='select-none'>
           <Link href={'/'}>
             <Image
               src={logoImg}

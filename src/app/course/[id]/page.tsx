@@ -199,7 +199,7 @@ lg:w-[360px] lg:h-[330px]"
                 <div
                   className="relative xl:z-10 -z-10 flex justify-end
         xl:bottom-[550px] md:bottom-[730px] bottom-[700px] 
-        lg:left-[30px] md:left-[0px] left-[60px]"
+        lg:left-[30px] md:left-[0px] left-[60px] select-none"
                 >
                   <Image
                     className="[clip:rect(auto,auto,390px,auto)] lg:[clip:rect(auto,auto,450px,auto)] right-[35px] top-[195px]
